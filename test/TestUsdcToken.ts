@@ -71,8 +71,9 @@ describe('TestUsdcToken contract', function () {
     })
 
     it('Should update balances after transfers', async function () {
-      const initialOwnerBalance = await testUsdcToken.balanceOf(owner.address)
-
+      const initialOwnerBalance: bigint = await testUsdcToken.balanceOf(
+        owner.address
+      )
       // Transfer 100 tokens from owner to addr1.
       await testUsdcToken.transfer(addr1.address, 100)
 
@@ -81,7 +82,7 @@ describe('TestUsdcToken contract', function () {
 
       // Check balances.
       const finalOwnerBalance = await testUsdcToken.balanceOf(owner.address)
-      expect(finalOwnerBalance).to.equal(initialOwnerBalance.sub(150))
+      expect(finalOwnerBalance).to.equal(initialOwnerBalance -BigInt(150))
 
       const addr1Balance = await testUsdcToken.balanceOf(addr1.address)
       expect(addr1Balance).to.equal(100)
